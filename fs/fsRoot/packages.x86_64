@@ -1,0 +1,15 @@
+base
+linux
+linux-firmware
+syslinux
+mkinitcpio
+mkinitcpio-archiso
+grub
+pv
+archinstall
+dialog
+nano
+gpart
+gptfdisk
+rsync
+zsh

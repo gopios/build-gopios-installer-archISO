@@ -1,0 +1,3 @@
+temp_packages.txt
+*.qcow2
+fs/fsRoot/airootfs/root/repo/packages/*
