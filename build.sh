@@ -26,7 +26,7 @@ rsync -a ../repo/packages/ $OS/airootfs/root/repo/packages/
 sleep 1
 echo "gopios Sync"
 # rsync -a ../gopios/repo/ ../os/airootfs/root/repo/
-rsync -a ../gopios/src/ $OS/airootfs/
+rsync -a ../gopios/src $OS/airootfs/root/
 sleep 1
 
 
