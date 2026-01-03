@@ -178,14 +178,31 @@ show_progress() {
         mapfile -t packages < /root/gopi.packages.all.amd64
         TOTAL_PACKAGES=${#packages[@]}
     else
-        TOTAL_PACKAGES=150
+        exit();
     fi
     
     PROGRESS_START=25
     PROGRESS_END=70
     PROGRESS_RANGE=$((PROGRESS_END - PROGRESS_START))
     
-    show_progress 4 "Installing base system (0/$TOTAL_PACKAGES packages)..."
+    show_progress 4 "Preparing system directories..."
+    
+    # Create necessary directories in the target system
+    mkdir -p /mnt/var/lib/pacman/sync
+    mkdir -p /mnt/var/lib/pacman/local
+    
+    # Create the package cache directory
+    mkdir -p /mnt/var/cache/pacman/pkg
+    
+    # Create the repository directory
+    mkdir -p /mnt/root/repo/packages
+    
+    # Initialize pacman keyring in the target
+    show_progress 5 "Initializing package manager..."
+    pacman-key --init
+    pacman-key --populate archlinux
+    
+    show_progress 8 "Installing base system (0/$TOTAL_PACKAGES packages)..."
     
     # Install packages with progress
     if [ -f /root/pacman.conf ]; then

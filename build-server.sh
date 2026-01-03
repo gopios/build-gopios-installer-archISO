@@ -14,11 +14,12 @@ sleep 1
 
 echo "Copy Build"
 cp -f pacmanLocalHost.conf $OS/pacman.conf
-# cp -f fs/fsRoot/airootfs/root/pacman.conf $OS/pacman.conf
 # cp -f profiledef.sh ../os/profiledef.sh
 # cp -f packages.x86_64 ../os/packages.x86_64
 # cp -f bootstrap_packages.x86_64 ../os/bootstrap_packages.x86_64
 rsync -a fs/fsRoot/ $OS/
+# rm $OS/airootfs/root/install.sh $OS/airootfs/root/install-dev.sh
+# cp -f fs/fsRoot/airootfs/root/install-dev.sh $OS/airootfs/root/install.sh
 
 echo "Copy packages"
 rsync -a ../repo/packages/ $OS/airootfs/root/repo/packages/
@@ -27,6 +28,9 @@ sleep 1
 echo "gopios Sync"
 # rsync -a ../gopios/repo/ ../os/airootfs/root/repo/
 rsync -a ../gopios/src/ $OS/airootfs/
+rm $OS/airootfs/etc/skel/Desktop/Apps/Google-Chrome.AppImage
+rm $OS/airootfs/root/install.sh
+cp fs/fsRoot/airootfs/root/install-server.sh $OS/airootfs/root/install.sh
 sleep 1
 
 

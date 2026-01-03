@@ -4,9 +4,9 @@ set -e
 
 trap 'echo "Exiting..."; exit 0' INT
 
-INPUT="../gopios/gopi.packages.amd64"
-OUTPUT="fs/fsRoot/airootfs/root/gopi.packages.all.amd64"
-TEMP="../gopios/gopi.packages.all.amd64.list"
+INPUT="../gopios/gopi-dev.packages.amd64"
+OUTPUT="fs/fsRoot/airootfs/root/gopi-dev.packages.all.amd64"
+TEMP="../gopios/gopi.packages-dev.all.amd64.list"
 TARGET_DIR="../repo/packages/"
 
 # Clear output file

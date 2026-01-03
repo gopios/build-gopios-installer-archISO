@@ -1,19 +1,19 @@
 #!/bin/bash
 
-set -e
+# set -e
 
 trap 'echo "Exiting..."; exit 0' INT
 
-INPUT="../gopios/gopi.packages.amd64"
-OUTPUT="fs/fsRoot/airootfs/root/gopi.packages.all.amd64"
-TEMP="../gopios/gopi.packages.all.amd64.list"
+INPUT="../gopios-dev/gopi-dev.packages.amd64"
+OUTPUT="fs/fsRoot/airootfs/root/gopi-dev.packages.all.amd64"
+TEMP="../gopios-dev/gopi-dev.packages.all.amd64.list"
 TARGET_DIR="../repo/packages/"
 
 # Clear output file
 echo "removing" "$OUTPUT" and "$TEMP"
 sleep 2
-> "$OUTPUT"
-> "$TEMP"
+rm "$OUTPUT"
+rm "$TEMP"
 rm -rf "$TARGET_DIR"
 
 while IFS= read -r line || [ -n "$line" ]; do
@@ -45,7 +45,7 @@ echo "Getting all dependencies..."
     
     # Then get their dependencies
     sort -u "$TEMP" | while read -r pkg; do
-        pactree -slu "$pkg" 2>/dev/null
+        pactree -slu "$pkg"
     done
 } | sort -u > "$OUTPUT"
 
@@ -59,7 +59,7 @@ sudo rm -rf /var/cache/pacman/pkg/*
 echo "Downloading packages to host cache..."
 
 sudo pacman -Syw --noconfirm $(cat "$OUTPUT")
-cp "$OUTPUT" ../gopios/  # just to have a copy of the list
+cp "$OUTPUT" ../gopios-dev/  # just to have a copy of the list
 
 
 mkdir -p "$TARGET_DIR"
